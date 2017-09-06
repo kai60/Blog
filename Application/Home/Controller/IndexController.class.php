@@ -6,28 +6,30 @@ class IndexController extends Controller {
     	$Data = M('Data');
     	$result=$Data->find(1);
     	$this->assign('re',$result);
-        $this->display();
+
+
+        $event = new \Home\Event\DBEvent();
+       // $event->hello();
+
+
+
+
+        $event2 = A('DB','Event');
+        $event2->hello();
+
+
+
+
+
+
+        //$this->display();
 
        
 
     }
-    public function hello()
+    protected  function login() 
     {
-    	echo "hello";
-
-        echo __ROOT__;
-        echo '<br>';
-        echo __APP__;
-        echo '<br>';
-        echo __MODULE__;
-        echo '<br>';
-        echo __CONTROLLER__;
-        echo '<br>';
-        echo __ACTION__;
-        echo '<br>';
-        echo '__PUBLIC__';
-        echo '<br>';
-        echo __URL__;
+    	
        
 
     }

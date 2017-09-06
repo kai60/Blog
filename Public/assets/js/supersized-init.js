@@ -2,7 +2,7 @@ jQuery(function($){
 
 
 
-    alert('__PUBLIC__')
+   
 
     $.supersized({
 
