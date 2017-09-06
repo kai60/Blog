@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>id</title>
+</head>
+<body>
+<table border="3">
+
+<tr>
+<th>id</th>
+ <th>标题</th>
+ <th>内容</th>	
+</tr>
+ 
+<volist name="list" id="data" > 
+
+<tr>
+		<td>{$data.id}</td>
+		<td>{$data.title}</td>
+		<td>{$data.content}</td>
+</tr>
+
+</volist>
+</table>
+</body>
+</html>
