@@ -14,8 +14,8 @@ class IndexController extends Controller {
 
 
 
-        $event2 = A('DB','Event');
-        $event2->hello();
+        $event = A('DB','Event');
+        $event->initDB();
 
 
 
