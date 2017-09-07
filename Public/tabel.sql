@@ -58,15 +58,35 @@ CREATE TABLE IF NOT EXISTS think_message(
    fromuser_id INT NOT NULL,
    touser_id INT NOT NULL,
    blog_id INT NOT NULL,
-   title VARCHAR(100) NOT NULL,
    message text NOT NULL,
    create_time datetime,
    state varchar(40),
    
    PRIMARY KEY ( message_id ),
-   FOREIGN KEY (user_id) REFERENCES think_user(user_id),
-   FOREIGN KEY (fromuser_id) REFERENCES think_blog(user_id),
-   FOREIGN KEY (touser_id) REFERENCES think_blog(user_id)
+   FOREIGN KEY (blog_id) REFERENCES think_blog(blog_id),
+   FOREIGN KEY (fromuser_id) REFERENCES think_user(user_id),
+   FOREIGN KEY (touser_id) REFERENCES think_user(user_id)
+   
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS think_sourece(
+   source_id INT UNSIGNED AUTO_INCREMENT,
+    blog_id INT NOT NULL,
+   user_id INT NOT NULL,
+   type INT ,
+   source_url varchar(40),
+   create_time datetime,
+   des varchar(40),
+   
+   PRIMARY KEY ( message_id ),
+   FOREIGN KEY (blog_id) REFERENCES think_blog(blog_id),
+   FOREIGN KEY (fromuser_id) REFERENCES think_user(user_id)
+   
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS think_vote(
+    blog_id INT NOT NULL,
+   read_count INT NOT NULL,
+   upvote INT 
    
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
