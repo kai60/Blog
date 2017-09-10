@@ -9,7 +9,7 @@
 </head>
 <body>
 <p>root:_</p>
-<p>self:/index.php/home/index/showvar/</p>
+<p>self:/index.php/Home/Index/showvar</p>
 <p>action:/index.php/Home/Index/showvar</p>
 <p>url:/index.php/Home/Index</p>
 <p>app:/index.php</p>

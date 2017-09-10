@@ -22,12 +22,34 @@ class IndexController extends Controller {
        
 
     }
-    protected  function login() 
+      function signup()
     {
-    	
-       
+
+        if(IS_POST)
+        {
+            echo I('name');
+            echo I('password');
+            echo I('email');
+
+
+        }
+        else
+        {
+            echo 'no value';
+        }
 
     }
+
+    function signin()
+    {
+        // $Data = M('Data');
+        // $result=$Data->find(1);
+        // $this->assign('re',$result);
+
+    }
+
+
+
     public function mainUser()
     {
        $this->display();

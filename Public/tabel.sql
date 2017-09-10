@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS think_user(
    sex varchar(40),
    birth date,
    
-   PRIMARY KEY ( user_id )
+   PRIMARY KEY ( user_id ),
+   UNIQUE (email)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS think_blog(
