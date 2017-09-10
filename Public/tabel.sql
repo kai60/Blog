@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS think_blog(
    PRIMARY KEY ( blog_id ),
    FOREIGN KEY (user_id) REFERENCES think_user(user_id)
    
+   
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS think_post(
@@ -47,9 +48,7 @@ CREATE TABLE IF NOT EXISTS think_post(
    create_time datetime,
    state varchar(40),
    
-   PRIMARY KEY ( blog_id ),
-   FOREIGN KEY (user_id) REFERENCES think_user(user_id),
-   FOREIGN KEY (blog_id) REFERENCES think_blog(user_id)
+   PRIMARY KEY ( post_id )
    
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -62,10 +61,7 @@ CREATE TABLE IF NOT EXISTS think_message(
    create_time datetime,
    state varchar(40),
    
-   PRIMARY KEY ( message_id ),
-   FOREIGN KEY (blog_id) REFERENCES think_blog(blog_id),
-   FOREIGN KEY (fromuser_id) REFERENCES think_user(user_id),
-   FOREIGN KEY (touser_id) REFERENCES think_user(user_id)
+   PRIMARY KEY ( message_id )
    
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -78,9 +74,7 @@ CREATE TABLE IF NOT EXISTS think_sourece(
    create_time datetime,
    des varchar(40),
    
-   PRIMARY KEY ( message_id ),
-   FOREIGN KEY (blog_id) REFERENCES think_blog(blog_id),
-   FOREIGN KEY (fromuser_id) REFERENCES think_user(user_id)
+   PRIMARY KEY ( source_id )
    
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE IF NOT EXISTS think_vote(

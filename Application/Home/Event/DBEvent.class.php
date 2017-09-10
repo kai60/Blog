@@ -13,7 +13,7 @@ class DBEvent extends Controller
     var $dbPassword = '';
     var $dbSchema = '';
 
-    function __construct($host,$user,$password,$schema='Kai')
+    function __construct($host,$user,$password,$schema='')
     {
 
         parent::__construct();
@@ -36,10 +36,11 @@ class DBEvent extends Controller
 
 
 
-        $dbhost = 'localhost:3306';  // mysql服务器主机地址
-        $dbuser = 'root';            // mysql用户名
-        $dbpass = 'root';          // mysql用户名密码
-        $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
+
+
+
+
+        $conn = mysqli_connect($this->dbHost,$this->dbUser ,$this-> dbPassword);
         if(! $conn )
         {
             die('连接失败: ' . mysqli_error($conn));
@@ -58,10 +59,9 @@ class DBEvent extends Controller
 
         while ($row=$result->fetch_assoc())
         {
-            // print_r($row);
-            $db = $row['Database'];
 
-            echo $db.'<br>';
+            $db=$row['Database'];
+
 
             if ($db==$dbname)
             {
@@ -75,7 +75,7 @@ class DBEvent extends Controller
         if ($hasDB)
         {
             $this->dbSchema=$dbname;
-            echo '表结构完整';
+
 
 
         }
@@ -92,18 +92,17 @@ class DBEvent extends Controller
             if(! $retval )
             {
                 die('创建数据库失败: ' . mysqli_error($conn));
+
+
                 
             }
             else
             {
                 echo "数据库 $this->dbSchema 创建成功\n";
 
-                $arr=C("TMPL_PARSE_STRING");
 
-                print_r($arr);
-                $public= $arr['__PUBLIC__'];
-                echo $public;
-                if ($this->createFromFile($public."table.sql",";"))
+
+                if ($this->createFromFile('/Applications/MAMP/htdocs/Public/tabel.sql',";"))
                 {
                     echo '创建表成功';
                 }
@@ -146,7 +145,7 @@ class DBEvent extends Controller
         //去掉注释和多余的空行
         foreach($segment as & $statement)
         {
-            $sentence = explode("/n",$statement);
+            $sentence = explode("\n",$statement);
 
             $newStatement = array();
 
@@ -158,7 +157,7 @@ class DBEvent extends Controller
                     $isComment = false;
                     foreach($commenter as $comer)
                     {
-                        if(eregi("^(".$comer.")",trim($subSentence)))
+                        if(preg_match("^(".$comer.")",trim($subSentence)))
                         {
                             $isComment = true;
                             break;
@@ -178,7 +177,7 @@ class DBEvent extends Controller
             $newStmt = '';
             foreach($statement as $sentence)
             {
-                $newStmt = $newStmt.trim($sentence)."/n";
+                $newStmt = $newStmt.trim($sentence)."\n";
             }
 
             $statement = $newStmt;
@@ -187,7 +186,15 @@ class DBEvent extends Controller
         //用于测试------------------------       
         //var_dump($segment);
         //writeArrayToFile('data.txt',$segment);
+
+
+
+
+
         //-------------------------------
+
+
+        //print_r($segment);
 
         self::saveByQuery($segment);
 
@@ -202,7 +209,13 @@ class DBEvent extends Controller
 
         foreach($sqlArray as $sql)
         {
+
+
+
            $conn-> query($sql);
+           echo mysqli_error($conn);
+
+
         }       
         $conn->close();
     }
@@ -216,7 +229,7 @@ class DBEvent extends Controller
     }
 
 
-    function writeArrayToFile($fileName,$dataArray,$delimiter="/r/n")
+    function writeArrayToFile($fileName,$dataArray,$delimiter="\r\n")
     {
         $handle=fopen($fileName, "wb");
 

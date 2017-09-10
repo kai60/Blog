@@ -5,7 +5,7 @@ return array(
 'DB_NAME'=>'thinkphp',// 数据库名
 'DB_USER'=>'root',// 用户名
 'DB_PWD'=>'root',// 密码
-'DB_PORT'=>3306,// 端口
+'DB_PORT'=>8889,// 端口
 'DB_PREFIX'=>'think_',// 数据库表前缀
 'DB_CHARSET'=>'utf8',// 数据库字符集
 'URL_ROUTER_ON'   => true,
@@ -16,7 +16,8 @@ return array(
     
  ),
 
+
 'URL_MAP_RULES'=>array(
 	'Form/ffff'               => 'Form/read?id=1',
-	),
+	)
 );

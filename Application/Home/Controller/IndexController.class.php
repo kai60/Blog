@@ -8,8 +8,9 @@ class IndexController extends Controller {
     	// $this->assign('re',$result);
 
 
-         $event = new \Home\Event\DBEvent('localhost','root','root','Kk');;
-        $event->hello();
+         $event = new \Home\Event\DBEvent(C('DB_HOST').':'.C('DB_PORT'),C('DB_USER'),C('DB_PWD'),C('DB_NAME'));
+
+         $this->display();
 
 
 
@@ -30,5 +31,10 @@ class IndexController extends Controller {
     public function mainUser()
     {
        $this->display();
+    }
+
+    public function showvar()
+    {
+        $this->display();
     }
 }
