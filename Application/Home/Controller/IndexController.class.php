@@ -27,9 +27,24 @@ class IndexController extends Controller {
 
         if(IS_POST)
         {
-            echo I('name');
-            echo I('password');
-            echo I('email');
+            $user = D('User');
+
+
+
+            if (!$user->create()){
+                // 如果创建失败 表示验证没有通过 输出错误提示信息
+                echo ($user->getError());
+            }else{
+
+                echo $user->add();
+            }
+
+
+
+
+
+
+
 
 
         }
@@ -42,9 +57,7 @@ class IndexController extends Controller {
 
     function signin()
     {
-        // $Data = M('Data');
-        // $result=$Data->find(1);
-        // $this->assign('re',$result);
+         echo phpinfo();
 
     }
 

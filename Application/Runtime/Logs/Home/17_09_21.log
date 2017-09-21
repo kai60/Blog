@@ -1,0 +1,45 @@
+[ 2017-09-21T23:07:33+08:00 ] ::1 /index.php/Home/Index/signup
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000584s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000442s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000529s ]
+SQL: SHOW COLUMNS FROM `think_user` [ RunTime:0.0023s ]
+NOTIC: [8] Undefined index: validate /Applications/MAMP/htdocs/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /Applications/MAMP/htdocs/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: INSERT INTO `think_user` (`name`,`password`,`email`) VALUES ('','','163') [ RunTime:0.0021s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000925s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001068s ]
+
+[ 2017-09-21T23:08:49+08:00 ] ::1 /index.php/Home/Index/signup
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000681s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001769s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001906s ]
+SQL: SHOW COLUMNS FROM `think_user` [ RunTime:0.0023s ]
+NOTIC: [8] Undefined index: validate /Applications/MAMP/htdocs/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /Applications/MAMP/htdocs/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: INSERT INTO `think_user` (`name`,`password`,`email`) VALUES ('','','163') [ RunTime:0.0018s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001934s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002101s ]
+
+[ 2017-09-21T23:11:12+08:00 ] ::1 /index.php/Home/Index/signup
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000335s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000392s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000468s ]
+SQL: SHOW COLUMNS FROM `think_user` [ RunTime:0.0037s ]
+NOTIC: [8] Undefined index: validate /Applications/MAMP/htdocs/ThinkPHP/Library/Think/Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto /Applications/MAMP/htdocs/ThinkPHP/Library/Think/Model.class.php 第 1128 行.
+SQL: INSERT INTO `think_user` (`name`,`password`,`email`) VALUES ('','','163') [ RunTime:0.0021s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000609s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000718s ]
+
