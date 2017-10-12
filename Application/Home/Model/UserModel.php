@@ -12,6 +12,8 @@ use Think\Model;
 class UserModel extends  Model
 {
 
+    //protected $tableName = 'user';
+
     protected $_validate    =   array(
         array('email','','',0,'unique' ,1),
         array('name','require','名字必须'),

@@ -29,9 +29,22 @@ class IndexController extends Controller {
         {
             $user = D('User');
 
+            $rules=array(
+                array('email','','',0,'unique' ,1),
+                array('name','require','名字必须'),
+                array('password','require','密码必须'),
+                array('email','email','',0,'unique' ,1),
+                array('name','','名字必须',0,'unique' ,1)
+
+            );
+
+            $auto=array(
+                array('regtime','time',1,'function'),
+            );
 
 
-            if (!$user->create()){
+
+            if (!$user->auto($auto)->validate($rules)->create($_POST,1)){
                 // 如果创建失败 表示验证没有通过 输出错误提示信息
                 echo ($user->getError());
             }else{
