@@ -29,27 +29,44 @@ class IndexController extends Controller {
         {
             $user = D('User');
 
-            $rules=array(
-                array('email','','',0,'unique' ,1),
+
+            $rules= array(
                 array('name','require','名字必须'),
                 array('password','require','密码必须'),
-                array('email','email','',0,'unique' ,1),
-                array('name','','名字必须',0,'unique' ,1)
+                array('repassword','password','确认密码不正确',0,'confirm'),
+                array('email','email','邮箱格式不对',0,'unique' ,1)
+
 
             );
 
-            $auto=array(
-                array('regtime','time',1,'function'),
+            $auto= array(
+                array('regtime','time',1,'function')
             );
 
 
 
-            if (!$user->auto($auto)->validate($rules)->create($_POST,1)){
+
+
+
+            if (!$user->validate($rules)->auto($auto)->create($_POST,1)){
                 // 如果创建失败 表示验证没有通过 输出错误提示信息
-                echo ($user->getError());
+
+                $this->error($user->getError());
+
             }else{
 
-                echo $user->add();
+                $result = $user->add();
+
+
+                if($result){
+                    //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+                    $this->success('新增成功', U('Main/homePage'));
+                } else {
+                    //错误页面的默认跳转页面是返回前一页，通常不需要设置
+                    $this->error('新增失败');
+                }
+
+
             }
 
 
@@ -70,7 +87,27 @@ class IndexController extends Controller {
 
     function signin()
     {
-         echo phpinfo();
+
+        $User=M('User');
+        $email=I('post.email');
+        $password=I('post.password');
+
+        $condition['email'] = $email;
+        $condition['name'] = $email;
+        $condition['_logic'] = 'OR';
+
+
+
+        $nickname = $User->where($condition)->find();
+
+        if ($nickname["password"]==$password)
+        {
+            //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+            $this->success("你好,".$nickname["name"], U('Main/homePage',array('name'=>$nickname["name"])));
+        } else {
+            //错误页面的默认跳转页面是返回前一页，通常不需要设置
+            $this->error('密码或者用户名错误');
+        }
 
     }
 
