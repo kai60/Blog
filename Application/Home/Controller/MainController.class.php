@@ -18,4 +18,9 @@ class MainController extends Controller
       $this->assign('name',$name);
       $this->display();
   }
+
+  function writer()
+  {
+      $this->display();
+  }
 }
