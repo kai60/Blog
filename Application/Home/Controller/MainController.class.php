@@ -23,4 +23,8 @@ class MainController extends Controller
   {
       $this->display();
   }
+    function postblog()
+    {
+        print_r( I('POST.'));
+    }
 }
