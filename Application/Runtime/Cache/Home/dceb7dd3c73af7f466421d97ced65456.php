@@ -14,16 +14,48 @@
 
 
 <div>
-  <input type="text" name="title" placeholder="标题" class="title">
+  <input type="text" name="title" placeholder="标题" class="title" id="title">
 </div>
   <div id="summernote"><p>Hello ,<b>从这里开始</b></p></div>
 <div>
-  <input type="submit" value="发布" class="submit">
+
+  <input type="button" value="发布" class="submit" id="ajaxBtn">
 </div>
 </form>
   <script>
     $(document).ready(function() {
         $('#summernote').summernote();
+        $('#ajaxBtn').click(function ()
+        {
+
+
+            $.ajax({
+                type: "POST",
+                data :{
+                    "title":"ff",//$('#title').val(),
+                    "content":"jj",//$('.note-editing-area').val(),
+                    "user_id":"祝发冬",
+                    "author":"author",
+                    "create_time":"哈哈哈"
+
+                },
+                url : '/index.php/Home/Main/postblog',
+                cache: false,
+                processData: false,
+                contentType: 'multipart/form-data',
+                success:function(data){
+                       alert(data);
+                 },
+                error:function(xhr,status,error){
+                     alert(error);
+                   }
+        });
+
+        })
+
+
+
+
     });
   </script>
 </body>

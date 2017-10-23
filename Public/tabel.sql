@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS think_blog(
    birth date,
    state varchar(40),
    
-   PRIMARY KEY ( blog_id ),
-   FOREIGN KEY (user_id) REFERENCES think_user(user_id)
+   PRIMARY KEY ( blog_id )
+   
    
    
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

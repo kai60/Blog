@@ -23,8 +23,14 @@ class MainController extends Controller
   {
       $this->display();
   }
-    function postblog()
-    {
-        print_r( I('POST.'));
-    }
+
+  function postblog()
+  {
+      $arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+      //echo json_encode($arr);
+      //echo json_encode( I('POST.'));
+
+
+     echo  I('POST.title');
+  }
 }
