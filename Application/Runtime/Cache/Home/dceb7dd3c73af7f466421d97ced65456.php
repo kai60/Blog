@@ -27,29 +27,27 @@
         $('#summernote').summernote();
         $('#ajaxBtn').click(function ()
         {
+            personObj=new Object();
+            personObj.firstname="John";
+            personObj.lastname="Doe";
+            personObj.age=50;
+            personObj.eyecolor="blue";
 
 
             $.ajax({
                 type: "POST",
-                data :{
-                    "title":"ff",//$('#title').val(),
-                    "content":"jj",//$('.note-editing-area').val(),
-                    "user_id":"祝发冬",
-                    "author":"author",
-                    "create_time":"哈哈哈"
-
-                },
+                data :$.param(personObj),
                 url : '/index.php/Home/Main/postblog',
                 cache: false,
                 processData: false,
-                contentType: 'multipart/form-data',
+                contentType: 'application/x-www-form-urlencoded',
                 success:function(data){
                        alert(data);
                  },
                 error:function(xhr,status,error){
                      alert(error);
                    }
-        });
+                   });
 
         })
 
