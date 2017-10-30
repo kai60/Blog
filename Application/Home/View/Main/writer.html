@@ -27,25 +27,33 @@
         $('#summernote').summernote();
         $('#ajaxBtn').click(function ()
         {
-            personObj=new Object();
-            personObj.firstname="John";
-            personObj.lastname="Doe";
-            personObj.age=50;
-            personObj.eyecolor="blue";
+            blog=new Object();
+            blog.title=$('#title').text();
+            blog.content=$('.note-editing-area').html();
+            blog.user_id=1;
+            blog.create_time=new Date();
+            blog.author='author';
 
 
             $.ajax({
                 type: "POST",
-                data :$.param(personObj),
+                data :$.param(blog),
                 url : '__URL__/postblog',
                 cache: false,
                 processData: false,
                 contentType: 'application/x-www-form-urlencoded',
-                success:function(data){
-                       alert(data);
+                dataType:'json',
+                success:function(result){
+                      
+                      if (result.status) 
+                      {
+                        alert(result.message);
+                        location.href=result.url;
+
+                      }
                  },
                 error:function(xhr,status,error){
-                     alert(error);
+                     
                    }
                    });
 

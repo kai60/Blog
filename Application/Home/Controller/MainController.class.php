@@ -26,17 +26,57 @@ class MainController extends Controller
 
   function postblog()
   {
-      $arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
-     // echo $_POST['city'];
-     // echo json_encode($arr);
-      echo json_encode( I('POST.'));
+
+   
+    $out = array();
+
+        if(IS_POST)
+        {
+            $blog = D('Blog');
+
+
+            if (!$blog->create($_POST,1))
+            {
+                // 如果创建失败 表示验证没有通过 输出错误提示信息
+
+               
+                $out['error']=$blog->getError();
+
+            }else
+            {
+
+                $result = $blog->add();
+
+                
+
+
+                if($result)
+                {
+                    //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+                   
+                    $out = array('status' =>1 ,'url'=>U('homePage'),'message'=>'message!' );
+                    $out['status']=1;
+                    $out['url']=U('homePage');
+                    $out['message']='文章发布成功!';
+                } else 
+                {
+                    $out['status']=0;
+                    $out['url']=U('homePage');
+                    $out['message']='文章发布失败!';
+                }
+
+
+            }
 
 
 
+        }
+        else
+        {
+           
+        }
 
-
-
-
+        echo json_encode($out);
 
   }
 }
