@@ -28,8 +28,12 @@
         $('#ajaxBtn').click(function ()
         {
             blog=new Object();
-            blog.title=$('#title').text();
-            blog.content=$('.note-editing-area').html();
+            blog.title=$('#title').val();
+
+            var content=$('.note-editable').html();
+            console.log(content);
+            content.replace(/contentEditable="true"/g, 'contentEditable="false"');
+            blog.content=content;
             blog.user_id=1;
             blog.create_time=new Date();
             blog.author='author';

@@ -15,7 +15,23 @@ class MainController extends Controller
 {
   function homePage($name='')
   {
+
+
+
+      $blog = M("Blog"); // 实例化User对象
+      $condition['author'] = 'author';
+// 把查询条件传入查询方法
+     $blogList= $blog->where($condition)->select();
+
+
       $this->assign('name',$name);
+      $this->assign('blogList',$blogList);
+
+      //var_dump($blogList);
+
+
+
+
       $this->display();
   }
 
