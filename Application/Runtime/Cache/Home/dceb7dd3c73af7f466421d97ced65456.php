@@ -29,14 +29,13 @@
         {
             blog=new Object();
             blog.title=$('#title').val();
-
             var content=$('.note-editable').html();
             console.log(content);
             content.replace(/contentEditable="true"/g, 'contentEditable="false"');
             blog.content=content;
-            blog.user_id=1;
-            blog.create_time=new Date();
-            blog.author='author';
+            //blog.user_id=1;
+            //blog.create_time=new Date();
+            //blog.author='author';
 
 
             $.ajax({

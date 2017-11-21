@@ -13,21 +13,20 @@ use Think\Controller;
 
 class MainController extends Controller
 {
-  function homePage($name='')
+  function homePage($name='author')
   {
 
 
 
       $blog = M("Blog"); // 实例化User对象
-      $condition['author'] = 'author';
+      $condition['author'] = $name;
 // 把查询条件传入查询方法
-     $blogList= $blog->where($condition)->select();
+     $blogList= $blog->where($condition)->order('create_time desc')->select();
 
 
-      $this->assign('name',$name);
+
       $this->assign('blogList',$blogList);
 
-      //var_dump($blogList);
 
 
 
@@ -50,18 +49,20 @@ class MainController extends Controller
         {
             $blog = D('Blog');
 
+            $user=session('user');
 
-            if (!$blog->create($_POST,1))
-            {
-                // 如果创建失败 表示验证没有通过 输出错误提示信息
+            $data=$_POST;
+            $data['user_id']=$user['user_id'];
+            $data['author']=$user['name'];
+            //$time = time();
+            $dt = date("Y-m-d H:i:s",time());
+            $data['create_time']=$dt;
 
-               
-                $out['error']=$blog->getError();
 
-            }else
-            {
+            $result=$blog->add($data);
 
-                $result = $blog->add();
+
+
 
                 
 
@@ -69,20 +70,18 @@ class MainController extends Controller
                 if($result)
                 {
                     //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
-                   
-                    $out = array('status' =>1 ,'url'=>U('homePage'),'message'=>'message!' );
                     $out['status']=1;
-                    $out['url']=U('homePage');
+                    $out['url']=U('homePage','name='.$user['name']);
                     $out['message']='文章发布成功!';
                 } else 
                 {
                     $out['status']=0;
-                    $out['url']=U('homePage');
+                    $out['url']=U('homePage','name='.$user['name']);
                     $out['message']='文章发布失败!';
                 }
 
 
-            }
+
 
 
 

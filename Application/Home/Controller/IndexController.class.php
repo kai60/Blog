@@ -103,10 +103,14 @@ class IndexController extends Controller {
         if ($nickname["password"]==$password)
         {
             //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+
+            session("user",$nickname);
             $this->success("你好,".$nickname["name"], U('Main/homePage',array('name'=>$nickname["name"])));
+
         } else {
             //错误页面的默认跳转页面是返回前一页，通常不需要设置
             $this->error('密码或者用户名错误');
+            session("user",null);
         }
 
     }
