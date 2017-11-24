@@ -60,7 +60,18 @@ class IndexController extends Controller {
 
                 if($result){
                     //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
-                    $this->success('新增成功', U('Main/homePage'));
+
+                    $User=M('User');
+                    $email=I('post.email');
+                    $condition['email'] = $email;
+                    $condition['name'] = I('post.name');;
+                    $condition['_logic'] = 'OR';
+
+
+
+                    $curentUser = $User->where($condition)->find();
+                    session("user",$curentUser);
+                    $this->success('新增成功', U('Main/homePage','name='.$curentUser['name']));
                 } else {
                     //错误页面的默认跳转页面是返回前一页，通常不需要设置
                     $this->error('新增失败');
