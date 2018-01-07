@@ -10,22 +10,38 @@ namespace Home\Controller;
 
 
 use Think\Controller;
+require 'vendor/autoload.php';
+use JasonGrimes\Paginator;
 
 class MainController extends Controller
 {
-  function homePage($name='author')
+  function homePage($name='author',$pagesize=2,$pageindex=1)
   {
 
 
 
       $blog = M("Blog"); // 实例化User对象
+
+      $firstBlog_id = $blog->field('blog_id')->order('blog_id desc')->limit(1)->select();
+//获取最新一条id 进行分页
+      $newestBlog=$firstBlog_id[0]['blog_id'];
+      print_r($newestBlog);
       $condition['author'] = $name;
+      $condition['blog_id']=array('ELT',$newestBlog-($pageindex-1)*$pagesize);
+
 // 把查询条件传入查询方法
-     $blogList= $blog->where($condition)->order('create_time desc')->select();
+     $blogList= $blog->where($condition)->order('create_time desc')->limit($pagesize)->select();
+
+     $count=$blog->count('*');
 
 
+
+
+      $paginator = $this->pages($count,$pagesize,$pageindex);
 
       $this->assign('blogList',$blogList);
+      $this->assign('paginator',$paginator);
+
 
 
 
@@ -33,6 +49,28 @@ class MainController extends Controller
 
       $this->display();
   }
+
+
+    /**
+     * @param $totalRecord
+     * @param $pageSize
+     * @param $page
+     * @return Paginator
+     */
+    protected function pages($totalRecord, $pageSize, $page)
+    {
+        $parameter  = $_GET;
+        $parameter['pageindex'] = '(:num)';
+
+       // print_r($parameter);
+        $urlPattern = U(ACTION_NAME, $parameter);
+        //echo $urlPattern;
+        $urlPattern = str_replace(urlencode('(:num)'),'(:num)',$urlPattern);
+        $paginator = new Paginator($totalRecord, $pageSize, $page,$urlPattern);
+        $paginator->setPreviousText('上一页');
+        $paginator->setNextText('下一页');
+        return $paginator;
+    }
 
   function writer()
   {
